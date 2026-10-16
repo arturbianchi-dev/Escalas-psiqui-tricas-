@@ -20,6 +20,26 @@ create table if not exists public.chat_messages (
 alter table public.profiles enable row level security;
 alter table public.user_app_data enable row level security;
 alter table public.chat_messages enable row level security;
+-- Create each profile automatically, including while email confirmation is pending.
+create or replace function public.handle_new_team_bianchi_user()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $
+begin
+  insert into public.profiles (id, full_name, role)
+  values (new.id, coalesce(new.raw_user_meta_data->>'full_name', ''), 'user')
+  on conflict (id) do update
+    set full_name = excluded.full_name;
+  return new;
+end;
+$;
+drop trigger if exists on_auth_user_created_team_bianchi on auth.users;
+create trigger on_auth_user_created_team_bianchi
+after insert on auth.users
+for each row execute procedure public.handle_new_team_bianchi_user();
+
 -- SECURITY DEFINER avoids recursive RLS checks when verifying admin privileges.
 create or replace function public.is_team_admin()
 returns boolean language sql stable security definer set search_path = public
