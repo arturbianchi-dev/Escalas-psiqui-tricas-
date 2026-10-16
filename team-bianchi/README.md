@@ -27,7 +27,7 @@ where id = (select id from auth.users where email = 'SEU_EMAIL_ADMIN');
 ```
 O cadastro público de administrador **não concede privilégios automaticamente**. Isso impede que qualquer visitante vire administrador. Depois, o responsável entra pela aba Administrador.
 
-## 5. Publicar
+## 5. Atualizar o banco para o painel e chat compartilhado\n\nSe você já executou uma versão anterior do SQL, execute novamente o arquivo atualizado `supabase-schema.sql` no SQL Editor. Ele cria a tabela `chat_messages` e as políticas para o administrador consultar alunos e trocar mensagens individualmente.\n\n## 6. Publicar
 Faça commit dos arquivos e aguarde o GitHub Pages atualizar. A autenticação só funcionará depois dos passos acima.
 
 ## O que esta versão faz
@@ -37,4 +37,4 @@ Faça commit dos arquivos e aguarde o GitHub Pages atualizar. A autenticação s
 - área interna protegida por sessão;
 - dados do plano sincronizados por conta em `user_app_data`.
 
-Observação: cada conta tem seu próprio registro de plano. A interface atual ainda não inclui um painel para o administrador selecionar alunos e editar o plano deles; isso é uma próxima etapa separada.
+O administrador pode selecionar um aluno no painel **Alunos**, editar o plano de treino/dieta dele e conversar pelo chat individual. Para refletir alterações, é necessário que o esquema SQL atualizado tenha sido executado no Supabase.
