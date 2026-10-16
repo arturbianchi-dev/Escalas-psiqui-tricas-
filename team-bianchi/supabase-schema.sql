@@ -28,7 +28,7 @@ create policy "profile update own name only" on public.profiles for update to au
 using (id=auth.uid()) with check (id=auth.uid() and role='user');
 drop policy if exists "data read own or admin" on public.user_app_data;
 create policy "data read own or admin" on public.user_app_data for select to authenticated
-using (user_id=auth.uid() or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role='admin'));
+using (user_id=auth.uid() or public.is_team_admin());
 drop policy if exists "data insert own" on public.user_app_data;
 create policy "data insert own" on public.user_app_data for insert to authenticated
 with check (user_id=auth.uid());
