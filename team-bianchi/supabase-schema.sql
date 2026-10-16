@@ -34,7 +34,7 @@ create policy "data insert own" on public.user_app_data for insert to authentica
 with check (user_id=auth.uid());
 drop policy if exists "data update own or admin" on public.user_app_data;
 create policy "data update own or admin" on public.user_app_data for update to authenticated
-using (user_id=auth.uid() or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role='admin'))
+using (user_id=auth.uid() or public.is_team_admin())
 with check (user_id=auth.uid() or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role='admin'));
 -- Admin authorization must be performed by the project owner, never from the public registration form.
 -- After creating the account and confirming its email, run:
