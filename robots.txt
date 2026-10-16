@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arturbianchi-dev.github.io/Escalas-psiqui-tricas-/sitemap.xml
