@@ -12,9 +12,14 @@ create table if not exists public.user_app_data (
 );
 alter table public.profiles enable row level security;
 alter table public.user_app_data enable row level security;
+-- SECURITY DEFINER evita recursão de RLS ao verificar a função de administrador.
+create or replace function public.is_team_admin()
+returns boolean language sql stable security definer set search_path = public
+as $ select exists(select 1 from public.profiles where id = auth.uid() and role = 'admin'); $;
+grant execute on function public.is_team_admin() to authenticated;
 drop policy if exists "profile read own or admin" on public.profiles;
 create policy "profile read own or admin" on public.profiles for select to authenticated
-using (id = auth.uid() or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role='admin'));
+using (id = auth.uid() or public.is_team_admin());
 drop policy if exists "profile insert own as user" on public.profiles;
 create policy "profile insert own as user" on public.profiles for insert to authenticated
 with check (id=auth.uid() and role='user');
