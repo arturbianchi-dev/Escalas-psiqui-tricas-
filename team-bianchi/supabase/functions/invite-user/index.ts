@@ -41,7 +41,7 @@ Deno.serve(async (req: Request) => {
     const payload = await req.json();
     const email = String(payload?.email ?? "").trim().toLowerCase();
     const fullName = String(payload?.full_name ?? "").trim().slice(0, 120);
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || email.length > 254 || !fullName) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254 || !fullName) {
       return new Response(JSON.stringify({ error: "Informe nome completo e um e-mail válido." }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
 
