@@ -7,4 +7,8 @@
     <loc>https://arturbianchi-dev.github.io/Escalas-psiqui-tricas-/cardiologia/</loc>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://arturbianchi-dev.github.io/Escalas-psiqui-tricas-/team-bianchi/schedule.html</loc>
+    <changefreq>weekly</changefreq>
+  </url>
 </urlset>
