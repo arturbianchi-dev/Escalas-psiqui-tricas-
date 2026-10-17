@@ -15,7 +15,7 @@
  <a class="brand" href="./index.html" aria-label="Team Bianchi">
   <div class="mark">TB</div><div><h1>TEAM BIANCHI</h1><p>AGENDA • ORGANIZAÇÃO E PERFORMANCE</p></div>
  </a>
- <div class="top-actions"><a class="btn back-link" href="./app.html">Área do time ↗</a><button class="btn primary" id="newBtn">＋ Novo compromisso</button></div>
+ <div class="top-actions"><a class="btn back-link" href="./app.html">Área do time ↗</a><button class="btn" id="exportBtn">Exportar .ics</button><button class="btn primary" id="newBtn">＋ Novo compromisso</button></div>
 </header>
 <div class="layout">
  <aside class="sidebar">
@@ -125,7 +125,7 @@ function closeModal(){$('modalOverlay').classList.add('hidden');editingId=null;}
 function showToast(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),2300);}
 function changePeriod(n){if(view==='month')cursor=new Date(cursor.getFullYear(),cursor.getMonth()+n,1);else cursor=addDays(cursor,n*(view==='week'?7:1));render();}
 function exportICS(){const list=visibleEvents();if(!list.length){showToast('Não há compromissos para exportar.');return;}const stamp=d=>d.replace(/[-:]/g,'').replace(/\.\d{3}/,'');const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Team Bianchi//Agenda//PT-BR'];list.forEach(e=>{const start=new Date(e.date+'T'+e.start+':00');const end=new Date(start.getTime()+(Number(e.duration)||60)*60000);const utc=d=>d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z';lines.push('BEGIN:VEVENT','UID:'+e.id+'@teambianchi','DTSTAMP:'+utc(new Date()),'DTSTART:'+utc(start),'DTEND:'+utc(end),'SUMMARY:'+e.title.replace(/[\\,;]/g,' '),'DESCRIPTION:'+(e.notes||'').replace(/[\\,;]/g,' '),'LOCATION:'+(e.location||'').replace(/[\\,;]/g,' '),'END:VEVENT');});lines.push('END:VCALENDAR');const blob=new Blob([lines.join('\r\n')],{type:'text/calendar;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='team-bianchi-agenda.ics';a.click();URL.revokeObjectURL(url);showToast('Arquivo de agenda exportado.');}
-$('newBtn').addEventListener('click',()=>openModal(cursor));
+$('newBtn').addEventListener('click',()=>openModal(cursor));$('exportBtn').addEventListener('click',exportICS);
 $('closeModal').addEventListener('click',closeModal);$('cancelBtn').addEventListener('click',closeModal);
 $('modalOverlay').addEventListener('click',e=>{if(e.target===$('modalOverlay'))closeModal();});
 $('prevBtn').addEventListener('click',()=>changePeriod(-1));$('nextBtn').addEventListener('click',()=>changePeriod(1));$('todayBtn').addEventListener('click',()=>{cursor=new Date(today);render();});
