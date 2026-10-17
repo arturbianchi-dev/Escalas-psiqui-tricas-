@@ -12,6 +12,12 @@ Abra o arquivo `index.html` em um navegador. Não há dependências de build.
 4. Selecione a branch `main` e a pasta `/(root)`, depois clique em **Save**.
 5. Aguarde a publicação e abra o endereço mostrado na seção Pages. A primeira publicação pode levar alguns minutos.
 
+## Team Bianchi — agenda e consultoria
+
+- Agenda interativa: [abrir Team Bianchi](https://arturbianchi-dev.github.io/Escalas-psiqui-tricas-/team-bianchi/schedule.html).
+- A agenda permite criar, editar e excluir compromissos, alternar entre visões semanal/diária/mensal, filtrar categorias e exportar compromissos em `.ics`.
+- Os dados da agenda são armazenados no navegador atual. A sincronização entre usuários/dispositivos exige um backend compartilhado; a agenda não se conecta à conta Prime Coaching.
+
 ## Escopo e segurança
 - Conteúdo educacional e apoio à prática; não substitui avaliação clínica, diagnóstico, protocolo local ou julgamento profissional.
 - As calculadoras aplicam regras resumidas de pontuação. Confirme a versão validada, os pontos de corte e as condições de uso/licenciamento antes do uso assistencial.
