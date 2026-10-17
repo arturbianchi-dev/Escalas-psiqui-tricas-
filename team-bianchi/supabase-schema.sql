@@ -74,3 +74,31 @@ with check (sender_id = auth.uid() and (user_id = auth.uid() or public.is_team_a
 -- Admin authorization is performed only by the project owner, never by public signup.
 -- After creating and confirming the admin account, run the following with the real email:
 -- update public.profiles set role = 'admin' where id = (select id from auth.users where email = 'ADMIN_EMAIL_HERE');
+
+-- Índices para carregar rapidamente as conversas mais recentes por aluno.
+create index if not exists chat_messages_user_created_idx
+  on public.chat_messages (user_id, created_at desc);
+create index if not exists chat_messages_sender_idx
+  on public.chat_messages (sender_id);
+create index if not exists profiles_role_name_idx
+  on public.profiles (role, full_name);
+
+-- Mantém updated_at atualizado sempre que o plano do usuário for alterado.
+create or replace function public.set_team_bianchi_updated_at()
+returns trigger language plpgsql set search_path = public
+as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+drop trigger if exists user_app_data_updated_at on public.user_app_data;
+create trigger user_app_data_updated_at
+before update on public.user_app_data
+for each row execute function public.set_team_bianchi_updated_at();
+
+-- Garante permissões de uso das tabelas para usuários autenticados; RLS continua controlando cada linha.
+grant select, insert, update on public.profiles to authenticated;
+grant select, insert, update on public.user_app_data to authenticated;
+grant select, insert on public.chat_messages to authenticated;
+grant usage, select on sequence public.chat_messages_id_seq to authenticated;
