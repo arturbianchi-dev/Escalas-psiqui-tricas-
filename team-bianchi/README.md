@@ -12,7 +12,7 @@ No Supabase, abra **SQL Editor**, cole o conteúdo de `team-bianchi/supabase-sch
 
 ## 3. Ativar confirmação de e-mail
 Em **Authentication → Providers → Email**, mantenha a confirmação de e-mail habilitada. Em **URL Configuration**, adicione:
-- Site URL: `https://arturbianchi-dev.github.io`
+- Site URL: `https://arturbianchi-dev.github.io/Escalas-psiqui-tricas-/team-bianchi/`
 - Redirect URL: `https://arturbianchi-dev.github.io/Escalas-psiqui-tricas-/team-bianchi/index.html`
 Ajuste a URL se o endereço de Pages do repositório for diferente. Para entrega real de e-mails, configure SMTP próprio em Authentication → SMTP Settings; o serviço padrão tem limitações de envio.
 
@@ -27,7 +27,7 @@ where id = (select id from auth.users where email = 'SEU_EMAIL_ADMIN');
 ```
 O cadastro público de administrador **não concede privilégios automaticamente**. Isso impede que qualquer visitante vire administrador. Depois, o responsável entra pela aba Administrador.
 
-## 5. Atualizar o banco para o painel e chat compartilhado\n\nSe você já executou uma versão anterior do SQL, execute novamente o arquivo atualizado `supabase-schema.sql` no SQL Editor. Ele cria a tabela `chat_messages` e as políticas para o administrador consultar alunos e trocar mensagens individualmente.\n\n## 6. Publicar
+## 5. Atualizar o banco para o painel e chat compartilhado\n\nSe você já executou uma versão anterior do SQL, execute novamente o arquivo atualizado `supabase-schema.sql` no SQL Editor. Ele cria a tabela `chat_messages` e as políticas para o administrador consultar alunos e trocar mensagens individualmente.\n\n## 8. Publicar
 Faça commit dos arquivos e aguarde o GitHub Pages atualizar. A autenticação só funcionará depois dos passos acima.
 
 ## O que esta versão faz
