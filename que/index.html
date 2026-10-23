@@ -1,11 +1,28 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111318"><title>Que?</title>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111318"><title>Que?</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111318}body{display:grid;place-items:center;font-family:system-ui,-apple-system,sans-serif;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}.stage{width:100%;height:100%;display:grid;place-items:center;padding:0}.sticker{width:min(100vw,100vh);aspect-ratio:1;position:relative;transition:transform .12s ease;overflow:hidden}.dog{width:100%;height:100%;object-fit:cover;display:block}.sticker:active{transform:scale(.985)}
-.mouth{position:absolute;left:25.5%;top:58%;width:35%;height:0;opacity:0;background:#10090b;border:2px solid #2b1516;border-radius:45% 45% 52% 52%;overflow:hidden;transform:rotate(-2deg) scaleX(.85);transform-origin:50% 0;transition:height .09s ease,opacity .06s ease,transform .09s ease;z-index:2;box-shadow:inset 0 5px 0 #4b2927}.teeth{position:absolute;top:0;left:5%;width:90%;height:18%;background:#f5e8d2;border-radius:0 0 45% 45%;clip-path:polygon(0 0,100% 0,94% 100%,82% 65%,72% 100%,60% 65%,50% 100%,39% 65%,27% 100%,16% 65%,7% 100%)}.tongue{position:absolute;left:28%;bottom:-8%;width:47%;height:68%;background:linear-gradient(90deg,#9d3151,#e56c83 48%,#a52f50);border-radius:48% 48% 38% 38%;box-shadow:inset 4px 0 0 #78223e;transform:rotate(5deg)}.tongue:after{content:"";position:absolute;left:50%;top:10%;height:70%;width:2px;background:#8f2946;opacity:.8}.mouth.open{height:34%;opacity:1;transform:rotate(-5deg) scaleX(1.16);animation:jaw .18s infinite alternate}@keyframes jaw{from{transform:rotate(-5deg) scaleX(1.12) scaleY(.94)}to{transform:rotate(3deg) scaleX(1.2) scaleY(1.08)}}@media(prefers-reduced-motion:reduce){.mouth,.sticker{transition:none;animation:none}}
-</style></head><body><main class="stage" aria-label="Toque para ouvir que"><div class="sticker" id="sticker"><img class="dog" src="./dog-clean.svg" alt="Cachorro olhando para a câmera"><div class="mouth" id="mouth" aria-hidden="true"><div class="teeth"></div><div class="tongue"></div></div></div></main>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111318}
+body{display:grid;place-items:center;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.stage{width:100%;height:100%;display:grid;place-items:center}.frame{width:min(100vw,103.8vh);aspect-ratio:576/555;position:relative;overflow:hidden}
+.dog{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}
+.caption-fix{position:absolute;left:29%;top:77.5%;width:43%;height:14%;overflow:hidden;pointer-events:none}
+.caption-fix img{position:absolute;width:232.6%;height:111.1%;max-width:none;left:-67.4%;top:-82%;object-fit:fill}
+.mouth{position:absolute;left:12.5%;top:54.5%;width:30%;height:0;opacity:0;overflow:hidden;z-index:3;border-radius:48% 48% 55% 55%;background:radial-gradient(ellipse at 48% 24%,#1b0809 0,#090506 56%,#2b1011 76%,#56302b 100%);border:1.5px solid rgba(49,20,19,.9);box-shadow:inset 0 4px 5px #000,0 2px 3px #6b4a3d55;transform-origin:50% 0;transition:height .11s ease,opacity .08s ease}
+.mouth:before{content:"";position:absolute;left:4%;top:0;width:92%;height:16%;border-radius:0 0 50% 50%;background:linear-gradient(#e0c0a0,#876053 65%,transparent);opacity:.85}
+.tongue{position:absolute;left:26%;bottom:-13%;width:50%;height:53%;border-radius:55% 55% 42% 42%;background:radial-gradient(ellipse at 45% 8%,#e58a8f 0,#bf4b5d 47%,#772536 100%);box-shadow:inset 0 3px 4px #f4a0a055;transform:rotate(-3deg)}
+.tongue:after{content:"";position:absolute;left:50%;top:10%;height:65%;width:1px;background:#8d2d42;opacity:.65}
+.mouth.open{height:24%;opacity:1;animation:talk .16s infinite alternate}
+@keyframes talk{from{transform:scaleX(.98) scaleY(.95)}to{transform:scaleX(1.05) scaleY(1.04)}}
+@media(prefers-reduced-motion:reduce){.mouth{animation:none;transition:none}}
+</style></head>
+<body><main class="stage"><div class="frame" id="frame" aria-label="Toque para ouvir que">
+<img class="dog" src="./dog.jpg" alt="O cachorro da figurinha original">
+<div class="caption-fix"><img src="./dog.jpg" alt=""></div>
+<div class="mouth" id="mouth" aria-hidden="true"><div class="tongue"></div></div>
+</div></main>
 <script>
-const mouth=document.getElementById('mouth'),sticker=document.getElementById('sticker');let closeTimer;
-function sayQue(){clearTimeout(closeTimer);mouth.classList.add('open');sticker.animate([{transform:'scale(1)'},{transform:'scale(1.035) rotate(-1deg)'},{transform:'scale(1)'}],{duration:300,easing:'ease-out'});if(!('speechSynthesis'in window)){closeTimer=setTimeout(()=>mouth.classList.remove('open'),650);return;}window.speechSynthesis.cancel();const voice=new SpeechSynthesisUtterance('que');voice.lang='pt-BR';voice.rate=.82;voice.pitch=1.12;voice.onend=()=>{closeTimer=setTimeout(()=>mouth.classList.remove('open'),100)};voice.onerror=()=>{closeTimer=setTimeout(()=>mouth.classList.remove('open'),650)};window.speechSynthesis.speak(voice)}
+const mouth=document.getElementById('mouth');let timer;
+function sayQue(){clearTimeout(timer);mouth.classList.add('open');if(!('speechSynthesis'in window)){timer=setTimeout(()=>mouth.classList.remove('open'),700);return}window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance('que');utterance.lang='pt-BR';utterance.rate=.84;utterance.pitch=1.04;utterance.onend=()=>timer=setTimeout(()=>mouth.classList.remove('open'),100);utterance.onerror=()=>timer=setTimeout(()=>mouth.classList.remove('open'),700);window.speechSynthesis.speak(utterance)}
 document.body.addEventListener('click',sayQue);document.body.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();sayQue()}});
 </script></body></html>
