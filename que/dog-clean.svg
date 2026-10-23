@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360">
+<image href="./dog.jpg" x="0" y="0" width="360" height="360"/>
+<defs><clipPath id="patch"><rect x="108" y="268" width="140" height="52"/></clipPath></defs>
+<image href="./dog.jpg" x="0" y="48" width="360" height="360" clip-path="url(#patch)"/>
+</svg>
