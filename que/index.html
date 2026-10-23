@@ -1,31 +1,11 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111318">
-<title>Que?</title>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111318"><title>Que?</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111318}body{display:grid;place-items:center;font-family:system-ui,-apple-system,sans-serif;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}.stage{width:100%;height:100%;display:grid;place-items:center;padding:18px}.sticker{width:min(100vw,100vh,576px);aspect-ratio:576/555;position:relative;filter:drop-shadow(0 18px 45px #0008);transition:transform .12s ease}.sticker img{width:100%;height:100%;object-fit:contain;display:block}.sticker:active{transform:scale(.975)}.hint{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#ffffff65;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.pop{animation:pop .28s ease}@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.06) rotate(-1deg)}100%{transform:scale(1)}}@media(prefers-reduced-motion:reduce){.sticker,.pop{animation:none;transition:none}}
-</style>
-</head>
-<body>
-<main class="stage" aria-label="Figurinha interativa. Toque para ouvir que.">
-<div class="sticker" id="sticker"><img src="./dog.jpg" alt="A figurinha original do cachorro com a palavra que"></div>
-</main>
-<div class="hint">toque em qualquer lugar</div>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111318}body{display:grid;place-items:center;font-family:system-ui,-apple-system,sans-serif;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}.stage{width:100%;height:100%;display:grid;place-items:center;padding:0}.sticker{width:min(100vw,100vh);aspect-ratio:1;position:relative;transition:transform .12s ease;overflow:hidden}.dog{width:100%;height:100%;object-fit:cover;display:block}.sticker:active{transform:scale(.985)}
+.mouth{position:absolute;left:25.5%;top:58%;width:35%;height:0;opacity:0;background:#10090b;border:2px solid #2b1516;border-radius:45% 45% 52% 52%;overflow:hidden;transform:rotate(-2deg) scaleX(.85);transform-origin:50% 0;transition:height .09s ease,opacity .06s ease,transform .09s ease;z-index:2;box-shadow:inset 0 5px 0 #4b2927}.teeth{position:absolute;top:0;left:5%;width:90%;height:18%;background:#f5e8d2;border-radius:0 0 45% 45%;clip-path:polygon(0 0,100% 0,94% 100%,82% 65%,72% 100%,60% 65%,50% 100%,39% 65%,27% 100%,16% 65%,7% 100%)}.tongue{position:absolute;left:28%;bottom:-8%;width:47%;height:68%;background:linear-gradient(90deg,#9d3151,#e56c83 48%,#a52f50);border-radius:48% 48% 38% 38%;box-shadow:inset 4px 0 0 #78223e;transform:rotate(5deg)}.tongue:after{content:"";position:absolute;left:50%;top:10%;height:70%;width:2px;background:#8f2946;opacity:.8}.mouth.open{height:34%;opacity:1;transform:rotate(-5deg) scaleX(1.16);animation:jaw .18s infinite alternate}@keyframes jaw{from{transform:rotate(-5deg) scaleX(1.12) scaleY(.94)}to{transform:rotate(3deg) scaleX(1.2) scaleY(1.08)}}@media(prefers-reduced-motion:reduce){.mouth,.sticker{transition:none;animation:none}}
+</style></head><body><main class="stage" aria-label="Toque para ouvir que"><div class="sticker" id="sticker"><img class="dog" src="./dog-clean.svg" alt="Cachorro olhando para a câmera"><div class="mouth" id="mouth" aria-hidden="true"><div class="teeth"></div><div class="tongue"></div></div></div></main>
 <script>
-const sticker=document.getElementById('sticker');
-function sayQue(){
- sticker.classList.remove('pop'); void sticker.offsetWidth; sticker.classList.add('pop');
- if(!('speechSynthesis' in window)) return;
- window.speechSynthesis.cancel();
- const voice=new SpeechSynthesisUtterance('que');
- voice.lang='pt-BR'; voice.rate=0.88; voice.pitch=1.08;
- window.speechSynthesis.speak(voice);
-}
-document.body.addEventListener('click',sayQue);
-document.body.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();sayQue()}});
-</script>
-</body>
-</html>
+const mouth=document.getElementById('mouth'),sticker=document.getElementById('sticker');let closeTimer;
+function sayQue(){clearTimeout(closeTimer);mouth.classList.add('open');sticker.animate([{transform:'scale(1)'},{transform:'scale(1.035) rotate(-1deg)'},{transform:'scale(1)'}],{duration:300,easing:'ease-out'});if(!('speechSynthesis'in window)){closeTimer=setTimeout(()=>mouth.classList.remove('open'),650);return;}window.speechSynthesis.cancel();const voice=new SpeechSynthesisUtterance('que');voice.lang='pt-BR';voice.rate=.82;voice.pitch=1.12;voice.onend=()=>{closeTimer=setTimeout(()=>mouth.classList.remove('open'),100)};voice.onerror=()=>{closeTimer=setTimeout(()=>mouth.classList.remove('open'),650)};window.speechSynthesis.speak(voice)}
+document.body.addEventListener('click',sayQue);document.body.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();sayQue()}});
+</script></body></html>
