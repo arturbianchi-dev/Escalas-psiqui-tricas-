@@ -6,45 +6,13 @@
 <meta name="theme-color" content="#111318">
 <title>Que?</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111318}body{display:grid;place-items:center;font-family:system-ui,-apple-system,sans-serif;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}.stage{width:100%;height:100%;display:grid;place-items:center;padding:18px}.sticker{width:min(100vw,100vh,560px);aspect-ratio:1;position:relative;filter:drop-shadow(0 18px 45px #0008);transition:transform .12s ease}.sticker:active{transform:scale(.975)}svg{width:100%;height:100%;display:block}.word{font-family:Arial,sans-serif;font-weight:800;font-size:76px;fill:white;paint-order:stroke;stroke:#ffffff22;stroke-width:1px}.hint{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#ffffff65;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.pop{animation:pop .28s ease}@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.06) rotate(-1deg)}100%{transform:scale(1)}}@media(prefers-reduced-motion:reduce){.sticker,.pop{animation:none;transition:none}}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111318}body{display:grid;place-items:center;font-family:system-ui,-apple-system,sans-serif;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}.stage{width:100%;height:100%;display:grid;place-items:center;padding:18px}.sticker{width:min(100vw,100vh,576px);aspect-ratio:576/555;position:relative;filter:drop-shadow(0 18px 45px #0008);transition:transform .12s ease}.sticker img{width:100%;height:100%;object-fit:contain;display:block}.sticker:active{transform:scale(.975)}svg{width:100%;height:100%;display:block}.word{font-family:Arial,sans-serif;font-weight:800;font-size:76px;fill:white;paint-order:stroke;stroke:#ffffff22;stroke-width:1px}.hint{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#ffffff65;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.pop{animation:pop .28s ease}@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.06) rotate(-1deg)}100%{transform:scale(1)}}@media(prefers-reduced-motion:reduce){.sticker,.pop{animation:none;transition:none}}
 </style>
 </head>
 <body>
 <main class="stage" aria-label="Figurinha interativa. Toque para ouvir que.">
 <div class="sticker" id="sticker">
-<svg viewBox="0 0 360 360" role="img" aria-label="Cachorro caramelo com a palavra que">
-<defs>
-<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#78b8ce"/><stop offset="1" stop-color="#c0dce4"/></linearGradient>
-<linearGradient id="fur" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#d7ad7c"/><stop offset="1" stop-color="#a86f45"/></linearGradient>
-<linearGradient id="muzzle" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff7e8"/><stop offset="1" stop-color="#d9c7b1"/></linearGradient>
-<filter id="soft"><feGaussianBlur stdDeviation="1.4"/></filter>
-</defs>
-<rect width="360" height="360" rx="2" fill="url(#bg)"/>
-<ellipse cx="182" cy="348" rx="102" ry="15" fill="#456a77" opacity=".22" filter="url(#soft)"/>
-<!-- ears -->
-<path d="M105 75 C69 59 43 83 48 145 C51 183 77 222 103 204 C123 185 126 120 105 75Z" fill="#895735"/>
-<path d="M249 72 C281 56 311 81 308 137 C306 177 284 211 262 199 C244 183 233 113 249 72Z" fill="#8f5a38"/>
-<!-- head -->
-<path d="M95 71 C115 37 153 30 181 34 C218 31 250 50 266 82 C280 119 272 172 254 211 C236 250 214 274 181 277 C145 277 116 253 99 214 C81 174 77 111 95 71Z" fill="url(#fur)"/>
-<!-- forehead blaze -->
-<path d="M159 42 C147 75 148 111 155 142 C161 165 164 183 181 202 C198 179 204 153 204 124 C205 89 196 58 181 38Z" fill="#f0dfc6" opacity=".9"/>
-<!-- eye patches -->
-<ellipse cx="128" cy="123" rx="31" ry="29" fill="#e4c9a6" opacity=".6"/>
-<ellipse cx="232" cy="121" rx="30" ry="29" fill="#e4c9a6" opacity=".6"/>
-<!-- eyes -->
-<ellipse cx="130" cy="124" rx="19" ry="22" fill="#161615"/>
-<ellipse cx="230" cy="122" rx="19" ry="22" fill="#161615"/>
-<ellipse cx="135" cy="117" rx="6" ry="7" fill="#fff" opacity=".94"/>
-<ellipse cx="235" cy="115" rx="6" ry="7" fill="#fff" opacity=".94"/>
-<!-- muzzle -->
-<path d="M117 170 C122 148 145 145 178 153 C210 143 239 150 246 173 C251 203 224 234 181 241 C143 237 113 207 117 170Z" fill="url(#muzzle)"/>
-<ellipse cx="181" cy="170" rx="35" ry="23" fill="#171719"/>
-<ellipse cx="170" cy="163" rx="9" ry="5" fill="#fff" opacity=".28"/>
-<path d="M181 190 C178 204 163 208 153 204 M181 190 C184 204 199 208 209 203" fill="none" stroke="#715b4d" stroke-width="4" stroke-linecap="round"/>
-<path d="M151 218 Q181 229 211 217" fill="none" stroke="#9b7460" stroke-width="3" stroke-linecap="round"/>
-<!-- word -->
-<text x="180" y="319" text-anchor="middle" class="word">que</text>
-</svg>
+<img src="./dog.jpg" alt="A figurinha original do cachorro com a palavra que" />
 </div>
 </main>
 <div class="hint">toque em qualquer lugar</div>
